@@ -7,5 +7,11 @@
   "text": "sem login. sem carregamento desnecessário. só o que eu quiser colocar aqui.",
   "footer": "feito pra ser leve.",
   "background": "#0a0a0b",
-  "gallery": []
+  "gallery": [
+    {
+      "src": "images/1786901149544-dce0963a-sunny.png",
+      "label": "mistsunny",
+      "alt": "Discord"
+    }
+  ]
 }
