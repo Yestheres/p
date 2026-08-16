@@ -13,162 +13,164 @@
       margin: 0;
       min-height: 100vh;
       color: #f5f5f5;
+      background: #0a0a0b;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
       background:
         radial-gradient(circle at 15% 15%, rgba(255,255,255,.07), transparent 28rem),
-        radial-gradient(circle at 85% 60%, rgba(255,255,255,.04), transparent 24rem),
-        #0a0a0b;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        radial-gradient(circle at 85% 60%, rgba(255,255,255,.04), transparent 24rem);
+      z-index: -1;
     }
     a { color: inherit; }
     .wrap { width: min(1040px, calc(100% - 40px)); margin: 0 auto; }
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 84px;
-    }
-    .logo { font-weight: 800; font-size: 24px; letter-spacing: -1px; text-decoration: none; }
-    .nav { display: flex; gap: 20px; }
-    .nav a { color: #aaa; text-decoration: none; font-size: 14px; transition: .2s ease; }
-    .nav a:hover { color: #fff; }
-    .hero {
-      min-height: 62vh;
-      display: grid;
-      align-content: center;
-      padding: 70px 0 90px;
-    }
-    .eyebrow { color: #8d8d93; font-size: 13px; text-transform: uppercase; letter-spacing: .18em; }
-    h1 {
-      margin: 14px 0 18px;
-      max-width: 800px;
-      font-size: clamp(52px, 10vw, 118px);
-      line-height: .88;
-      letter-spacing: -.065em;
-      font-weight: 800;
-    }
-    .lead {
-      margin: 0;
-      max-width: 600px;
-      color: #aaa;
-      font-size: clamp(17px, 2vw, 21px);
-      line-height: 1.55;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 16px;
-      padding: 0 0 90px;
-    }
-    .card {
-      position: relative;
-      min-height: 320px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.09);
-      border-radius: 24px;
-      background: #111114;
-      isolation: isolate;
-    }
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,.12), transparent 38%),
-        radial-gradient(circle at 75% 25%, rgba(255,255,255,.14), transparent 30%);
-      opacity: .75;
-      z-index: -1;
-    }
-    .card img {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      inset: 0;
-      object-fit: cover;
-      display: block;
-    }
-    .card .label {
-      position: absolute;
-      left: 22px;
-      bottom: 20px;
-      padding: 8px 11px;
-      border-radius: 999px;
-      color: #eee;
-      background: rgba(0,0,0,.48);
-      border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(10px);
-      font-size: 12px;
-    }
-    .one { grid-column: span 7; min-height: 430px; }
-    .two { grid-column: span 5; min-height: 430px; }
-    .three { grid-column: span 5; }
-    .four { grid-column: span 7; }
-    .text-block {
-      padding: 80px 0 110px;
-      border-top: 1px solid rgba(255,255,255,.09);
-    }
-    .text-block p {
-      margin: 0;
-      max-width: 850px;
-      font-size: clamp(30px, 5vw, 58px);
-      line-height: 1.08;
-      letter-spacing: -.045em;
-      font-weight: 650;
-    }
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 26px 0 38px;
-      color: #74747b;
-      border-top: 1px solid rgba(255,255,255,.09);
-      font-size: 13px;
-    }
-    @media (max-width: 720px) {
-      .wrap { width: min(100% - 26px, 1040px); }
-      header { min-height: 70px; }
-      .nav { gap: 12px; }
-      .hero { min-height: 58vh; padding: 48px 0 70px; }
-      .gallery { gap: 12px; padding-bottom: 65px; }
-      .one, .two, .three, .four { grid-column: 1 / -1; min-height: 340px; }
-      .text-block { padding: 62px 0 78px; }
-      footer { flex-direction: column; }
+    header { display:flex; align-items:center; justify-content:space-between; min-height:84px; }
+    .logo { font-weight:800; font-size:24px; letter-spacing:-1px; text-decoration:none; }
+    .nav { display:flex; gap:20px; }
+    .nav a { color:#aaa; text-decoration:none; font-size:14px; transition:.2s ease; }
+    .nav a:hover { color:#fff; }
+    .hero { min-height:62vh; display:grid; align-content:center; padding:70px 0 90px; }
+    .eyebrow { color:#8d8d93; font-size:13px; text-transform:uppercase; letter-spacing:.18em; }
+    h1 { margin:14px 0 18px; max-width:800px; font-size:clamp(52px,10vw,118px); line-height:.88; letter-spacing:-.065em; font-weight:800; white-space:pre-line; }
+    .lead { margin:0; max-width:600px; color:#aaa; font-size:clamp(17px,2vw,21px); line-height:1.55; }
+    .gallery { display:grid; grid-template-columns:repeat(12,1fr); gap:16px; padding:0 0 90px; }
+    .card { position:relative; min-height:320px; overflow:hidden; border:1px solid rgba(255,255,255,.09); border-radius:24px; background:#111114; isolation:isolate; }
+    .card::before { content:""; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 38%),radial-gradient(circle at 75% 25%,rgba(255,255,255,.14),transparent 30%); opacity:.75; z-index:-1; }
+    .card img { width:100%; height:100%; position:absolute; inset:0; object-fit:cover; display:block; }
+    .card .label { position:absolute; left:22px; bottom:20px; padding:8px 11px; border-radius:999px; color:#eee; background:rgba(0,0,0,.48); border:1px solid rgba(255,255,255,.12); backdrop-filter:blur(10px); font-size:12px; }
+    .one { grid-column:span 7; min-height:430px; }
+    .two { grid-column:span 5; min-height:430px; }
+    .three { grid-column:span 5; }
+    .four { grid-column:span 7; }
+    .text-block { padding:80px 0 110px; border-top:1px solid rgba(255,255,255,.09); }
+    .text-block p { margin:0; max-width:850px; font-size:clamp(30px,5vw,58px); line-height:1.08; letter-spacing:-.045em; font-weight:650; white-space:pre-line; }
+    footer { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:26px 0 38px; color:#74747b; border-top:1px solid rgba(255,255,255,.09); font-size:13px; }
+    .footer-right { display:flex; align-items:center; gap:14px; }
+    .edit-link { color:#666; text-decoration:none; border:1px solid rgba(255,255,255,.08); padding:6px 9px; border-radius:999px; transition:.2s; }
+    .edit-link:hover { color:#fff; border-color:rgba(255,255,255,.2); }
+    .loading { min-height:50vh; display:grid; place-items:center; color:#777; }
+    @media (max-width:720px) {
+      .wrap { width:min(100% - 26px,1040px); }
+      header { min-height:70px; }
+      .nav { gap:12px; }
+      .hero { min-height:58vh; padding:48px 0 70px; }
+      .gallery { gap:12px; padding-bottom:65px; }
+      .one,.two,.three,.four { grid-column:1 / -1; min-height:340px; }
+      .text-block { padding:62px 0 78px; }
+      footer { align-items:flex-start; flex-direction:column; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <a class="logo" href="#">m.</a>
-      <nav class="nav" aria-label="Navegação">
-        <a href="#imagens">imagens</a>
-        <a href="#texto">texto</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero">
-        <span class="eyebrow">página estática</span>
-        <h1>simples.<br>visual.<br>meu.</h1>
-        <p class="lead">Um lugar pequeno pra deixar imagens, palavras e qualquer coisa que não precise de aplicativo, conta ou menu complicado.</p>
-      </section>
-
-      <section class="gallery" id="imagens" aria-label="Galeria">
-        <!-- Troque os blocos abaixo por: <img src="imagens/sua-imagem.jpg" alt="descrição"> -->
-        <article class="card one"><span class="label">imagem 01</span></article>
-        <article class="card two"><span class="label">imagem 02</span></article>
-        <article class="card three"><span class="label">imagem 03</span></article>
-        <article class="card four"><span class="label">imagem 04</span></article>
-      </section>
-
-      <section class="text-block" id="texto">
-        <p>sem login. sem carregamento desnecessário. só o que eu quiser colocar aqui.</p>
-      </section>
-    </main>
-
-    <footer>
-      <span>feito pra ser leve.</span>
-      <span>© 2026</span>
-    </footer>
+  <div class="wrap" id="app">
+    <div class="loading">carregando...</div>
   </div>
+
+  <script>
+    const cardClasses = ['one','two','three','four'];
+
+    async function loadSite() {
+      try {
+        const res = await fetch('./site.json?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('Não foi possível carregar site.json');
+        const data = await res.json();
+        render(data);
+      } catch (err) {
+        document.querySelector('#app').innerHTML = '<div class="loading">não foi possível carregar a página.</div>';
+        console.error(err);
+      }
+    }
+
+    function render(data) {
+      document.title = data.pageTitle || data.siteName || 'm.';
+      document.body.style.background = data.background || '#0a0a0b';
+
+      const app = document.querySelector('#app');
+      app.innerHTML = '';
+
+      const header = document.createElement('header');
+      const logo = document.createElement('a');
+      logo.className = 'logo';
+      logo.href = '#';
+      logo.textContent = data.siteName || 'm.';
+      const nav = document.createElement('nav');
+      nav.className = 'nav';
+      nav.setAttribute('aria-label', 'Navegação');
+      nav.innerHTML = '<a href="#imagens">imagens</a><a href="#texto">texto</a>';
+      header.append(logo, nav);
+
+      const main = document.createElement('main');
+      const hero = document.createElement('section');
+      hero.className = 'hero';
+      const eyebrow = document.createElement('span');
+      eyebrow.className = 'eyebrow';
+      eyebrow.textContent = data.eyebrow || '';
+      const h1 = document.createElement('h1');
+      h1.textContent = data.heroTitle || '';
+      const lead = document.createElement('p');
+      lead.className = 'lead';
+      lead.textContent = data.lead || '';
+      hero.append(eyebrow, h1, lead);
+
+      const gallery = document.createElement('section');
+      gallery.className = 'gallery';
+      gallery.id = 'imagens';
+      gallery.setAttribute('aria-label', 'Galeria');
+      const items = Array.isArray(data.gallery) ? data.gallery : [];
+      const shown = items.length ? items : [
+        { label: 'adicione imagens no editor' }, { label: 'imagem 02' },
+        { label: 'imagem 03' }, { label: 'imagem 04' }
+      ];
+      shown.forEach((item, index) => {
+        const card = document.createElement('article');
+        card.className = 'card ' + cardClasses[index % cardClasses.length];
+        if (item.src) {
+          const img = document.createElement('img');
+          img.src = item.src;
+          img.alt = item.alt || item.label || 'Imagem';
+          img.loading = 'lazy';
+          card.appendChild(img);
+        }
+        if (item.label) {
+          const label = document.createElement('span');
+          label.className = 'label';
+          label.textContent = item.label;
+          card.appendChild(label);
+        }
+        gallery.appendChild(card);
+      });
+
+      const textBlock = document.createElement('section');
+      textBlock.className = 'text-block';
+      textBlock.id = 'texto';
+      const text = document.createElement('p');
+      text.textContent = data.text || '';
+      textBlock.appendChild(text);
+
+      main.append(hero, gallery, textBlock);
+
+      const footer = document.createElement('footer');
+      const footerText = document.createElement('span');
+      footerText.textContent = data.footer || '';
+      const right = document.createElement('div');
+      right.className = 'footer-right';
+      const year = document.createElement('span');
+      year.textContent = '© ' + new Date().getFullYear();
+      const edit = document.createElement('a');
+      edit.className = 'edit-link';
+      edit.href = './admin.html';
+      edit.textContent = 'editar';
+      right.append(year, edit);
+      footer.append(footerText, right);
+
+      app.append(header, main, footer);
+    }
+
+    loadSite();
+  </script>
 </body>
 </html>
