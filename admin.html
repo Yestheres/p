@@ -1,217 +1,83 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Editor do site</title>
-  <style>
-    *{box-sizing:border-box} body{margin:0;background:#0b0b0d;color:#f4f4f5;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif} button,input,textarea{font:inherit} button{cursor:pointer}
-    .shell{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:24px 0 70px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.top h1{font-size:22px;margin:0}.top a{color:#aaa;text-decoration:none}.top a:hover{color:white}
-    .panel{background:#121215;border:1px solid #242429;border-radius:20px;padding:20px}.login{max-width:520px;margin:9vh auto}.login h2{margin:0 0 7px}.muted{color:#85858e;font-size:14px;line-height:1.5}.field{display:grid;gap:7px;margin:15px 0}.field label{font-size:13px;color:#a2a2aa}.field input,.field textarea{width:100%;border:1px solid #303038;background:#0d0d10;color:#fff;border-radius:11px;padding:11px 12px;outline:none}.field input:focus,.field textarea:focus{border-color:#686874}.field textarea{min-height:105px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .btn{border:0;border-radius:11px;padding:11px 15px;background:#f3f3f4;color:#111;font-weight:700}.btn.secondary{background:#222228;color:#eee;border:1px solid #34343b}.btn.danger{background:#2b1719;color:#ffb4bb;border:1px solid #5a252a}.btn:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.status{font-size:13px;color:#9a9aa3}.status.ok{color:#84d9a1}.status.bad{color:#ff949e}
-    .editor{display:none}.grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:18px}.sticky{position:sticky;top:18px;height:max-content}.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px}.section-title h2{font-size:17px;margin:0}.images{display:grid;gap:12px}.image-item{display:grid;grid-template-columns:110px 1fr;gap:13px;border:1px solid #29292f;background:#0e0e11;padding:11px;border-radius:14px}.thumb{width:110px;height:110px;border-radius:10px;background:#18181d;border:1px solid #29292f;overflow:hidden;display:grid;place-items:center;color:#666;font-size:12px}.thumb img{width:100%;height:100%;object-fit:cover}.mini-fields{display:grid;gap:8px}.mini-fields input{width:100%;border:1px solid #2e2e35;background:#121216;color:#fff;border-radius:9px;padding:8px 9px}.mini-actions{display:flex;flex-wrap:wrap;gap:6px}.mini-actions button,.file-label{border:1px solid #33333a;background:#1b1b20;color:#ddd;border-radius:8px;padding:6px 8px;font-size:12px;cursor:pointer}.mini-actions button:hover,.file-label:hover{background:#24242a}.file-label input{display:none}
-    .preview{border:1px solid #28282e;border-radius:17px;overflow:hidden;background:#09090b}.preview-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid #25252b;color:#999;font-size:12px}.preview iframe{display:block;width:100%;height:650px;border:0;background:#0a0a0b}.color-row{display:grid;grid-template-columns:1fr 48px;gap:8px}.color-row input[type=color]{padding:4px;height:42px}
-    .notice{margin-top:12px;padding:11px 12px;border-radius:10px;background:#17171c;color:#aaa;font-size:13px;line-height:1.5}.hidden{display:none!important}
-    @media(max-width:900px){.grid{grid-template-columns:1fr}.sticky{position:static}.preview iframe{height:500px}}@media(max-width:600px){.row{grid-template-columns:1fr}.image-item{grid-template-columns:82px 1fr}.thumb{width:82px;height:82px}.shell{width:min(100% - 18px,1180px)}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Editor do site</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b0b0d;color:#f5f5f5;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}.wrap{width:min(1100px,calc(100% - 24px));margin:auto;padding:26px 0 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.top h1{font-size:22px;margin:0}.top a{color:#aaa;text-decoration:none}.panel{background:#131317;border:1px solid #292930;border-radius:18px;padding:18px}.login{max-width:460px;margin:10vh auto}.muted{color:#8d8d97;font-size:14px;line-height:1.5}.field{display:grid;gap:7px;margin:14px 0}.field label{font-size:13px;color:#aaa}.field input,.field textarea{width:100%;border:1px solid #33333b;background:#0d0d10;color:#fff;border-radius:10px;padding:10px 11px;outline:none}.field textarea{min-height:100px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{border:0;border-radius:10px;padding:10px 14px;background:#f4f4f5;color:#111;font-weight:700}.btn.secondary{background:#222228;color:#eee;border:1px solid #36363e}.btn.danger{background:#31191c;color:#ffc0c6;border:1px solid #5f272d}.btn:disabled{opacity:.5}.actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.status{font-size:13px;color:#999}.ok{color:#8fe3a8}.bad{color:#ff9aa4}.editor{display:none}.grid{display:grid;grid-template-columns:1fr 360px;gap:16px}.sticky{position:sticky;top:16px;height:max-content}.images{display:grid;gap:10px}.image{display:grid;grid-template-columns:95px 1fr;gap:10px;border:1px solid #2b2b32;background:#0f0f12;border-radius:13px;padding:10px}.thumb{width:95px;height:95px;border-radius:9px;background:#19191e;overflow:hidden;display:grid;place-items:center;color:#666;font-size:12px}.thumb img{width:100%;height:100%;object-fit:cover}.mini{display:grid;gap:7px}.mini input{width:100%;border:1px solid #33333a;background:#141418;color:#fff;border-radius:8px;padding:7px 8px}.small{font-size:12px;padding:6px 8px}.preview{border:1px solid #2b2b32;border-radius:16px;overflow:hidden;background:#09090b}.preview iframe{display:block;width:100%;height:620px;border:0}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.section-title h2{font-size:17px;margin:0}.hidden{display:none!important}@media(max-width:860px){.grid{grid-template-columns:1fr}.sticky{position:static}.preview iframe{height:500px}}@media(max-width:560px){.row{grid-template-columns:1fr}.image{grid-template-columns:75px 1fr}.thumb{width:75px;height:75px}}
+</style>
 </head>
 <body>
-<div class="shell">
+<div class="wrap">
   <div class="top"><h1>Editor do site</h1><a href="./" target="_blank">abrir site ↗</a></div>
 
-  <section class="panel login" id="loginBox">
-    <h2>Entrar</h2>
-    <p class="muted">A senha é conferida pelo Worker. Ela nunca é salva no GitHub e só fica nesta aba enquanto você edita.</p>
-    <div class="field"><label>URL do Worker</label><input id="workerUrl" placeholder="https://seu-worker.seu-subdominio.workers.dev"></div>
-    <div class="field"><label>Senha do editor</label><input id="password" type="password" autocomplete="current-password" placeholder="••••••••"></div>
-    <div class="actions"><button class="btn" id="loginBtn">Entrar</button><span class="status" id="loginStatus"></span></div>
-    <div class="notice">Na primeira vez, cole a URL do Worker. Depois ela fica guardada só neste navegador.</div>
+  <section class="panel login" id="login">
+    <h2 style="margin-top:0">Entrar</h2>
+    <p class="muted">Digite a senha que você cadastrou no Cloudflare. O Worker já está configurado automaticamente.</p>
+    <div class="field"><label>Senha</label><input id="password" type="password" autocomplete="current-password" placeholder="••••••••"></div>
+    <div class="actions"><button class="btn" id="loginBtn">Entrar</button><span id="loginStatus" class="status"></span></div>
   </section>
 
   <section class="editor" id="editor">
     <div class="actions" style="margin-bottom:14px">
       <button class="btn" id="saveBtn">Salvar no GitHub</button>
       <button class="btn secondary" id="reloadBtn">Recarregar</button>
-      <button class="btn secondary" id="changeWorkerBtn">Trocar Worker</button>
-      <span class="status" id="saveStatus"></span>
+      <span id="saveStatus" class="status"></span>
     </div>
 
     <div class="grid">
-      <div style="display:grid;gap:18px">
+      <div style="display:grid;gap:16px">
         <section class="panel">
           <div class="section-title"><h2>Textos</h2></div>
           <div class="row">
             <div class="field"><label>Nome curto</label><input data-key="siteName"></div>
             <div class="field"><label>Título da aba</label><input data-key="pageTitle"></div>
           </div>
-          <div class="field"><label>Texto pequeno acima do título</label><input data-key="eyebrow"></div>
-          <div class="field"><label>Título principal</label><textarea data-key="heroTitle" placeholder="Quebra de linha funciona"></textarea></div>
+          <div class="field"><label>Texto pequeno</label><input data-key="eyebrow"></div>
+          <div class="field"><label>Título principal</label><textarea data-key="heroTitle"></textarea></div>
           <div class="field"><label>Descrição</label><textarea data-key="lead"></textarea></div>
-          <div class="field"><label>Texto grande de baixo</label><textarea data-key="text"></textarea></div>
+          <div class="field"><label>Texto de baixo</label><textarea data-key="text"></textarea></div>
           <div class="field"><label>Rodapé</label><input data-key="footer"></div>
-          <div class="field"><label>Fundo</label><div class="color-row"><input data-key="background"><input id="colorPicker" type="color" value="#0a0a0b"></div></div>
+          <div class="field"><label>Cor de fundo</label><input data-key="background" type="color" style="height:46px;padding:4px"></div>
         </section>
 
         <section class="panel">
-          <div class="section-title"><h2>Imagens</h2><button class="btn secondary" id="addImageBtn">+ Adicionar</button></div>
-          <div class="images" id="images"></div>
-          <p class="muted" id="emptyImages">Nenhuma imagem ainda. Clique em “Adicionar”.</p>
+          <div class="section-title"><h2>Imagens</h2><button class="btn secondary small" id="addImageBtn">+ adicionar</button></div>
+          <div id="images" class="images"></div>
+          <p id="empty" class="muted">Nenhuma imagem ainda.</p>
         </section>
       </div>
 
       <aside class="sticky">
-        <div class="preview">
-          <div class="preview-head"><span>Prévia</span><button class="btn secondary" id="refreshPreviewBtn" style="padding:6px 9px;font-size:12px">atualizar</button></div>
-          <iframe id="preview" src="./"></iframe>
-        </div>
+        <div class="preview"><iframe id="preview" src="./"></iframe></div>
       </aside>
     </div>
   </section>
 </div>
-
 <script>
-  const $ = s => document.querySelector(s);
-  const $$ = s => [...document.querySelectorAll(s)];
-  let worker = localStorage.getItem('p_worker_url') || '';
-  let password = sessionStorage.getItem('p_admin_password') || '';
-  let state = null;
-  const pendingFiles = new Map();
-
-  $('#workerUrl').value = worker;
-  $('#password').value = password;
-
-  function normalizeWorker(value) { return value.trim().replace(/\/+$/, ''); }
-  function setStatus(el, text, type='') { el.textContent = text; el.className = 'status ' + type; }
-
-  async function api(path, options={}) {
-    const headers = { ...(options.headers || {}) };
-    if (password) headers.Authorization = 'Bearer ' + password;
-    if (options.body && !headers['Content-Type']) headers['Content-Type'] = 'application/json';
-    return fetch(worker + path, { ...options, headers });
-  }
-
-  async function login() {
-    worker = normalizeWorker($('#workerUrl').value);
-    password = $('#password').value;
-    if (!worker || !password) return setStatus($('#loginStatus'), 'Preencha os dois campos.', 'bad');
-    $('#loginBtn').disabled = true;
-    setStatus($('#loginStatus'), 'verificando...');
-    try {
-      const res = await api('/auth', { method:'POST' });
-      if (!res.ok) throw new Error(res.status === 401 ? 'Senha incorreta.' : 'Não consegui falar com o Worker.');
-      localStorage.setItem('p_worker_url', worker);
-      sessionStorage.setItem('p_admin_password', password);
-      await loadContent();
-      $('#loginBox').classList.add('hidden');
-      $('#editor').style.display = 'block';
-    } catch (e) { setStatus($('#loginStatus'), e.message, 'bad'); }
-    finally { $('#loginBtn').disabled = false; }
-  }
-
-  async function loadContent() {
-    const res = await fetch('./site.json?t=' + Date.now(), { cache:'no-store' });
-    if (!res.ok) throw new Error('Não consegui carregar site.json');
-    state = await res.json();
-    state.gallery = Array.isArray(state.gallery) ? state.gallery : [];
-    pendingFiles.clear();
-    fillFields(); renderImages(); refreshPreview();
-  }
-
-  function fillFields() {
-    $$('[data-key]').forEach(el => { el.value = state[el.dataset.key] ?? ''; });
-    $('#colorPicker').value = /^#[0-9a-f]{6}$/i.test(state.background || '') ? state.background : '#0a0a0b';
-  }
-
-  function collectFields() {
-    $$('[data-key]').forEach(el => { state[el.dataset.key] = el.value; });
-  }
-
-  function newId() { return crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(16).slice(2); }
-
-  function addImage() {
-    state.gallery.push({ src:'', label:'imagem', alt:'' });
-    renderImages();
-  }
-
-  function renderImages() {
-    const box = $('#images'); box.innerHTML = '';
-    $('#emptyImages').style.display = state.gallery.length ? 'none' : 'block';
-    state.gallery.forEach((item, index) => {
-      const row = document.createElement('div'); row.className = 'image-item';
-      const thumb = document.createElement('div'); thumb.className = 'thumb';
-      const shownSrc = item.preview || item.src;
-      if (shownSrc) { const img = document.createElement('img'); img.src = shownSrc; img.alt=''; thumb.appendChild(img); }
-      else thumb.textContent = 'sem imagem';
-
-      const fields = document.createElement('div'); fields.className='mini-fields';
-      const label = document.createElement('input'); label.placeholder='Legenda'; label.value=item.label || ''; label.oninput=()=>item.label=label.value;
-      const alt = document.createElement('input'); alt.placeholder='Descrição da imagem'; alt.value=item.alt || ''; alt.oninput=()=>item.alt=alt.value;
-      const url = document.createElement('input'); url.placeholder='ou cole uma URL de imagem'; url.value=item.uploadId ? '' : (item.src || ''); url.oninput=()=>{ item.src=url.value.trim(); item.preview=''; item.uploadId=''; renderImages(); };
-
-      const actions = document.createElement('div'); actions.className='mini-actions';
-      const fileLabel = document.createElement('label'); fileLabel.className='file-label'; fileLabel.textContent='Escolher arquivo';
-      const file = document.createElement('input'); file.type='file'; file.accept='image/png,image/jpeg,image/webp,image/gif';
-      file.onchange=()=>selectFile(index,file.files[0]); fileLabel.appendChild(file);
-      const up=document.createElement('button');up.textContent='↑';up.title='Mover para cima';up.onclick=()=>moveImage(index,-1);
-      const down=document.createElement('button');down.textContent='↓';down.title='Mover para baixo';down.onclick=()=>moveImage(index,1);
-      const del=document.createElement('button');del.textContent='remover';del.onclick=()=>removeImage(index);
-      actions.append(fileLabel,up,down,del);
-      fields.append(label,alt,url,actions); row.append(thumb,fields); box.appendChild(row);
-    });
-  }
-
-  function selectFile(index, file) {
-    if (!file) return;
-    if (file.size > 3 * 1024 * 1024) return alert('Use uma imagem de até 3 MB.');
-    const id = newId(); pendingFiles.set(id,file);
-    const old = state.gallery[index].uploadId; if (old) pendingFiles.delete(old);
-    state.gallery[index].uploadId = id;
-    state.gallery[index].preview = URL.createObjectURL(file);
-    state.gallery[index].src = '';
-    renderImages();
-  }
-
-  function moveImage(i, delta) { const j=i+delta; if(j<0||j>=state.gallery.length)return; [state.gallery[i],state.gallery[j]]=[state.gallery[j],state.gallery[i]]; renderImages(); }
-  function removeImage(i) { const item=state.gallery[i]; if(item.uploadId)pendingFiles.delete(item.uploadId); state.gallery.splice(i,1); renderImages(); }
-
-  function fileToPayload(id,file) {
-    return new Promise((resolve,reject)=>{
-      const r=new FileReader();
-      r.onload=()=>resolve({ id, name:file.name, type:file.type, data:String(r.result).split(',')[1] });
-      r.onerror=reject; r.readAsDataURL(file);
-    });
-  }
-
-  async function save() {
-    collectFields();
-    $('#saveBtn').disabled=true; setStatus($('#saveStatus'),'preparando...');
-    try {
-      const files=[]; for (const [id,file] of pendingFiles) files.push(await fileToPayload(id,file));
-      const config=JSON.parse(JSON.stringify(state));
-      config.gallery.forEach(i=>delete i.preview);
-      setStatus($('#saveStatus'),'salvando no GitHub...');
-      const res=await api('/save',{method:'POST',body:JSON.stringify({config,files})});
-      const result=await res.json().catch(()=>({}));
-      if(!res.ok) throw new Error(result.error || 'Falha ao salvar.');
-      state=result.config || config; pendingFiles.clear(); fillFields(); renderImages();
-      setStatus($('#saveStatus'),'salvo ✓ pode levar alguns segundos para aparecer no Pages','ok');
-      setTimeout(refreshPreview,1800);
-    } catch(e) { setStatus($('#saveStatus'),e.message,'bad'); }
-    finally { $('#saveBtn').disabled=false; }
-  }
-
-  function refreshPreview(){ $('#preview').src='./?preview=' + Date.now(); }
-
-  $('#loginBtn').onclick=login;
-  $('#password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
-  $('#saveBtn').onclick=save;
-  $('#reloadBtn').onclick=()=>loadContent().catch(e=>setStatus($('#saveStatus'),e.message,'bad'));
-  $('#addImageBtn').onclick=addImage;
-  $('#refreshPreviewBtn').onclick=refreshPreview;
-  $('#changeWorkerBtn').onclick=()=>{sessionStorage.removeItem('p_admin_password');$('#editor').style.display='none';$('#loginBox').classList.remove('hidden');};
-  $('#colorPicker').oninput=e=>{ const input=$('[data-key="background"]'); input.value=e.target.value; state.background=e.target.value; };
-
-  if(worker && password) login();
+const WORKER='https://p-editor.silasfilho765.workers.dev';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+let password=sessionStorage.getItem('p_admin_password')||'';
+let state=null;
+const pendingFiles=new Map();
+$('#password').value=password;
+function status(el,text,type=''){el.textContent=text;el.className='status '+type}
+async function api(path,opt={}){const headers={...(opt.headers||{}),Authorization:'Bearer '+password};if(opt.body)headers['Content-Type']='application/json';return fetch(WORKER+path,{...opt,headers})}
+async function login(){password=$('#password').value;if(!password)return status($('#loginStatus'),'Digite a senha.','bad');$('#loginBtn').disabled=true;status($('#loginStatus'),'verificando...');try{const r=await api('/auth',{method:'POST'});if(!r.ok)throw new Error(r.status===401?'Senha incorreta.':'Falha ao falar com o Worker.');sessionStorage.setItem('p_admin_password',password);await load();$('#login').classList.add('hidden');$('#editor').style.display='block'}catch(e){status($('#loginStatus'),e.message,'bad')}finally{$('#loginBtn').disabled=false}}
+async function load(){const r=await fetch('./site.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('Não consegui carregar o site.');state=await r.json();state.gallery=Array.isArray(state.gallery)?state.gallery:[];pendingFiles.clear();fill();renderImages();refreshPreview()}
+function fill(){$$('[data-key]').forEach(el=>el.value=state[el.dataset.key]??'')}
+function collect(){$$('[data-key]').forEach(el=>state[el.dataset.key]=el.value)}
+function renderImages(){const box=$('#images');box.innerHTML='';$('#empty').style.display=state.gallery.length?'none':'block';state.gallery.forEach((item,i)=>{const row=document.createElement('div');row.className='image';const th=document.createElement('div');th.className='thumb';const src=item.preview||item.src;if(src){const im=document.createElement('img');im.src=src;th.appendChild(im)}else th.textContent='sem imagem';const mini=document.createElement('div');mini.className='mini';const label=document.createElement('input');label.placeholder='Legenda';label.value=item.label||'';label.oninput=()=>item.label=label.value;const alt=document.createElement('input');alt.placeholder='Descrição';alt.value=item.alt||'';alt.oninput=()=>item.alt=alt.value;const url=document.createElement('input');url.placeholder='URL da imagem';url.value=item.uploadId?'':(item.src||'');url.oninput=()=>{item.src=url.value.trim();item.uploadId='';item.preview='';renderImages()};const actions=document.createElement('div');actions.className='actions';const file=document.createElement('input');file.type='file';file.accept='image/png,image/jpeg,image/webp,image/gif';file.className='hidden';file.id='f'+i;file.onchange=()=>selectFile(i,file.files[0]);const choose=document.createElement('label');choose.htmlFor=file.id;choose.className='btn secondary small';choose.textContent='arquivo';const up=btn('↑',()=>move(i,-1)),down=btn('↓',()=>move(i,1)),del=btn('remover',()=>remove(i),'danger');actions.append(choose,file,up,down,del);mini.append(label,alt,url,actions);row.append(th,mini);box.appendChild(row)})}
+function btn(text,fn,extra='secondary'){const b=document.createElement('button');b.className='btn '+extra+' small';b.textContent=text;b.onclick=fn;return b}
+function addImage(){state.gallery.push({src:'',label:'imagem',alt:''});renderImages()}
+function move(i,d){const j=i+d;if(j<0||j>=state.gallery.length)return;[state.gallery[i],state.gallery[j]]=[state.gallery[j],state.gallery[i]];renderImages()}
+function remove(i){const item=state.gallery[i];if(item.uploadId)pendingFiles.delete(item.uploadId);state.gallery.splice(i,1);renderImages()}
+function selectFile(i,file){if(!file)return;if(file.size>3*1024*1024)return alert('Máximo 3 MB por imagem.');const id=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random());pendingFiles.set(id,file);state.gallery[i].uploadId=id;state.gallery[i].preview=URL.createObjectURL(file);state.gallery[i].src='';renderImages()}
+function filePayload(id,file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve({id,name:file.name,type:file.type,data:String(r.result).split(',')[1]});r.onerror=reject;r.readAsDataURL(file)})}
+async function save(){collect();$('#saveBtn').disabled=true;status($('#saveStatus'),'salvando...');try{const files=[];for(const [id,file] of pendingFiles)files.push(await filePayload(id,file));const config=JSON.parse(JSON.stringify(state));config.gallery.forEach(x=>delete x.preview);const r=await api('/save',{method:'POST',body:JSON.stringify({config,files})});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'Falha ao salvar.');state=data.config||config;pendingFiles.clear();fill();renderImages();status($('#saveStatus'),'salvo ✓','ok');setTimeout(refreshPreview,1800)}catch(e){status($('#saveStatus'),e.message,'bad')}finally{$('#saveBtn').disabled=false}}
+function refreshPreview(){$('#preview').src='./?t='+Date.now()}
+$('#loginBtn').onclick=login;$('#password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});$('#saveBtn').onclick=save;$('#reloadBtn').onclick=()=>load().catch(e=>status($('#saveStatus'),e.message,'bad'));$('#addImageBtn').onclick=addImage;
 </script>
 </body>
 </html>
